@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AWS EC2 Server Monitoring — Project Demo</title>
+  <meta name="description" content="Demo of an AWS CloudWatch-based EC2 monitoring stack with alarms and dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">AWS EC2 Monitoring</div>
+      <nav class="links">
+        <a href="#demo">Demo</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero container">
+    <div class="hero-content">
+      <h1>CloudWatch Monitoring for EC2 — Demo</h1>
+      <p class="subtitle">
+        Production-ready monitoring with CloudWatch Dashboard, Alarms, and SNS Email Alerts.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#demo">🚀 Launch Interactive Demo</a>
+        <a class="btn" href="https://github.com/yourusername/aws-server-monitoring-project" target="_blank" rel="noopener">View Source on GitHub</a>
+      </div>
+      <p class="note">Tip: Replace <code>yourusername</code> and repository path after you upload.</p>
+    </div>
+    <div class="hero-image">
+      <img src="assets/images/dashboard.svg" alt="CloudWatch dashboard preview">
+    </div>
+  </section>
+
+  <section id="demo" class="demo container">
+    <h2>Interactive Demo</h2>
+    <p>Click a card to preview the monitoring dashboard and alarm behavior.</p>
+    <div class="grid">
+      <div class="card" data-modal="#modal-dashboard">
+        <img src="assets/images/dashboard.svg" alt="Dashboard preview">
+        <div class="card-body">
+          <h3>CloudWatch Dashboard</h3>
+          <p>CPU Utilization, Network In/Out, Status Checks, and CPU Credits for T-instances.</p>
+        </div>
+      </div>
+      <div class="card" data-modal="#modal-alarms">
+        <img src="assets/images/alarms.svg" alt="Alarms preview">
+        <div class="card-body">
+          <h3>CloudWatch Alarms</h3>
+          <p>CPUUtilizationHigh and StatusCheckFailedAny with SNS email notifications.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="how container">
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>CloudFormation</strong> provisions a CloudWatch Dashboard, Alarms, and an SNS Topic.</li>
+      <li><strong>Metrics</strong> are collected from the EC2 instance (no agent required).</li>
+      <li><strong>Alarms</strong> trigger when thresholds are breached and send <strong>SNS emails</strong>.</li>
+      <li><strong>Dashboard</strong> provides a single-pane view for CPU, network, status checks, and credits.</li>
+    </ol>
+    <div class="code">
+<pre><code># Deploy (example)
+aws cloudformation deploy \
+  --template-file cloudformation/ec2-monitoring.yaml \
+  --stack-name ec2-monitoring-stack \
+  --capabilities CAPABILITY_NAMED_IAM \
+  --region ap-south-1 \
+  --parameter-overrides InstanceId=i-xxxxxxxx AlertEmail=you@example.com
+</code></pre>
+    </div>
+  </section>
+
+  <section id="about" class="about container">
+    <h2>About this project</h2>
+    <p>
+      This demo accompanies an AWS EC2 monitoring stack using CloudWatch and SNS. 
+      Replace the placeholder images with your own <em>real screenshots</em> after deploying the stack.
+    </p>
+    <ul>
+      <li>Update the GitHub link in the header button.</li>
+      <li>Replace <code>assets/images/dashboard.svg</code> and <code>assets/images/alarms.svg</code> with your screenshots (same filenames).</li>
+    </ul>
+    <p class="footer-note">© <span id="year"></span> Your Name</p>
+  </section>
+
+  <!-- Modals -->
+  <div class="modal" id="modal-dashboard" aria-hidden="true">
+    <div class="modal-dialog">
+      <button class="close" data-close>×</button>
+      <img src="assets/images/dashboard.svg" alt="Dashboard full view">
+      <h3>CloudWatch Dashboard</h3>
+      <p>CPU, Network, Status Checks, and CPU Credits in a single view.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="modal-alarms" aria-hidden="true">
+    <div class="modal-dialog">
+      <button class="close" data-close>×</button>
+      <img src="assets/images/alarms.svg" alt="Alarms full view">
+      <h3>CloudWatch Alarms</h3>
+      <p>Threshold-based alerts routed to email via SNS.</p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
